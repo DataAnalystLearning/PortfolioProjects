@@ -1,3 +1,4 @@
+/*  Global Data from Covid Cases, Deaths and Vaccinations up to 2021 */
 
 SELECT *
 FROM CovidDeaths
@@ -16,7 +17,7 @@ WHERE continent IS NOT NULL
 ORDER BY 1, 2
 
 /*  Total Cases vs Total Deaths  */
-/*  Percentage of someone dying if contracting Covid in country of origin */
+/*  Percentage of deaths in country of origin */
 
 SELECT location, date, total_cases, total_deaths, (total_deaths/total_cases) * 100 AS DeathPercentage
 FROM CovidDeaths
