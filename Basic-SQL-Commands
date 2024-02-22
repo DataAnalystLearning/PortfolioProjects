@@ -1,1 +1,28 @@
+/* Junior School Data Project */
 
+/* Lets see what we have */
+
+SELECT * FROM [Junior School Data CSV]
+
+/* We have numerous empty columns so lets remove those */
+
+ALTER TABLE [Junior School Data CSV]
+DROP COLUMN Other, column9, column10, column11, column12, column13, column14;
+
+/* Lets see how many devices we don't need to replace and then how many we do */
+
+SELECT * FROM [Junior School Data CSV]
+Where Consider_Replacing IN ('No');
+
+SELECT * FROM [Junior School Data CSV]
+Where Consider_Replacing IN ('Yes');
+
+/* Now lets see what the Make of the devices are that need replacing and then check their age */
+
+SELECT Device, Make_and_Model, Estimated_Age FROM [Junior School Data CSV]
+Where Consider_Replacing IN ('Yes')
+Order By Estimated_Age;
+
+/* What devices are coming to the end of their lifespan in the next couple of years */
+SELECT Device, Make_and_Model, End_Of_Life_Expectancy, Consider_Replacing FROM [Junior School Data CSV]
+WHERE End_Of_Life_Expectancy < '2026';
