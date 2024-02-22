@@ -9,6 +9,8 @@ SELECT * FROM [Junior School Data CSV]
 ALTER TABLE [Junior School Data CSV]
 DROP COLUMN Other, column9, column10, column11, column12, column13, column14;
 
+
+
 /* Lets see how many devices we don't need to replace and then how many we do */
 
 SELECT * FROM [Junior School Data CSV]
