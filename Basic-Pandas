@@ -1,1 +1,142 @@
+import pandas as pd
+	
+df = pd.read_excel(r"C:\Users\ECUTC\Desktop\Data Analyst Stuff\My Portfolio\Junior School Dashboard RAW.xlsx")
+df
+Location	Device	Make and Model	Estimated Age *	End Of Life Expectancy *	Consider Replacing	Other	Notes
+0	Data Cab	Switch	D Link DGS-1210-24	6 Years	2030	No	NaN	Plenty of spare ports left
+1	Data Cab	Switch	D Link DGS-1210-52	6 Years	2030	No	NaN	Just the one spare port
+2	Data Cab	Switch	Unifi PoE	4 Years	2030	No	NaN	Can't get the model number
+3	Data Cab	CCTV	Hikvision	Unknown	Unknown	No	NaN	One of the CCTV guys will know the specs of this.
+4	Data Cab	Router	Technicolor DGA0122NLK	5 Years	2028	No	NaN	Not sure if this is for the CCTV
+...	...	...	...	...	...	...	...	...
+247	Variable Rooms	Laptop	HP Probook 640 G2, stored in trolley	6 - 8 Years	2025	Soon	9	NaN
+248	Variable Rooms	Laptop	HP Probook 640 G2, stored in trolley	6 - 8 Years	2025	Soon	9	NaN
+249	Variable Rooms	Laptop	HP Probook 640 G2, stored in trolley	6 - 8 Years	2025	Soon	9	NaN
+250	Variable Rooms	Laptop	Lenovo 300e 2nd generation	2 - 3 Years	2024	Yes	16	Hardly used, all flat and not being charged
+251	Variable Rooms	Trolley	Unknown Make and Model	Unknown	Unknown	No	NaN	In good condition
+252 rows × 8 columns
+
+df = df.drop(columns = "Other")   # df = means it will save it so column stays dropped in future.
+df
+
+	Location	Device	Make and Model	Estimated Age *	End Of Life Expectancy *	Consider Replacing	Notes
+0	Data Cab	Switch	D Link DGS-1210-24	6 Years	2030	No	Plenty of spare ports left
+1	Data Cab	Switch	D Link DGS-1210-52	6 Years	2030	No	Just the one spare port
+2	Data Cab	Switch	Unifi PoE	4 Years	2030	No	Can't get the model number
+3	Data Cab	CCTV	Hikvision	Unknown	Unknown	No	One of the CCTV guys will know the specs of this.
+4	Data Cab	Router	Technicolor DGA0122NLK	5 Years	2028	No	Not sure if this is for the CCTV
+...	...	...	...	...	...	...	...
+247	Variable Rooms	Laptop	HP Probook 640 G2, stored in trolley	6 - 8 Years	2025	Soon	NaN
+248	Variable Rooms	Laptop	HP Probook 640 G2, stored in trolley	6 - 8 Years	2025	Soon	NaN
+249	Variable Rooms	Laptop	HP Probook 640 G2, stored in trolley	6 - 8 Years	2025	Soon	NaN
+250	Variable Rooms	Laptop	Lenovo 300e 2nd generation	2 - 3 Years	2024	Yes	Hardly used, all flat and not being charged
+251	Variable Rooms	Trolley	Unknown Make and Model	Unknown	Unknown	No	In good condition
+252 rows × 7 columns
+
+df = df.fillna('')              #  Removes the NaN 
+df
+
+Location	Device	Make and Model	Estimated Age *	End Of Life Expectancy *	Consider Replacing	Notes
+0	Data Cab	Switch	D Link DGS-1210-24	6 Years	2030	No	Plenty of spare ports left
+1	Data Cab	Switch	D Link DGS-1210-52	6 Years	2030	No	Just the one spare port
+2	Data Cab	Switch	Unifi PoE	4 Years	2030	No	Can't get the model number
+3	Data Cab	CCTV	Hikvision	Unknown	Unknown	No	One of the CCTV guys will know the specs of this.
+4	Data Cab	Router	Technicolor DGA0122NLK	5 Years	2028	No	Not sure if this is for the CCTV
+...	...	...	...	...	...	...	...
+247	Variable Rooms	Laptop	HP Probook 640 G2, stored in trolley	6 - 8 Years	2025	Soon	
+248	Variable Rooms	Laptop	HP Probook 640 G2, stored in trolley	6 - 8 Years	2025	Soon	
+249	Variable Rooms	Laptop	HP Probook 640 G2, stored in trolley	6 - 8 Years	2025	Soon	
+250	Variable Rooms	Laptop	Lenovo 300e 2nd generation	2 - 3 Years	2024	Yes	Hardly used, all flat and not being charged
+251	Variable Rooms	Trolley	Unknown Make and Model	Unknown	Unknown	No	In good condition
+252 rows × 7 columns
+
+for x in df.index:
+    if df.loc[x, "Consider Replacing"] == 'No':
+        df.drop(x, inplace=True)                   # drops the rows in column Consider Replacing that contains No
+df
+
+Location	Device	Make and Model	Estimated Age *	End Of Life Expectancy *	Consider Replacing	Notes
+6	Mrs Anderson's Class	Monitor	HannsG HE225	10 Years	Exceeded	Yes	21.5" The Monitor is blurry
+7	Mrs Anderson's Class	Server	Host Machine with four VM's	11 Years	Exceeded	Yes	Intel Xeon E3-1230 v3, 32GB RAM
+8	Mrs Anderson's Class	Server	Windows Server 2012R2	10 Years	Exceeded	Yes	Virtual Machine
+9	Mrs Anderson's Class	Server	Windows Server 2012R2	10 Years	Exceeded	Yes	Virtual Machine
+10	Mrs Anderson's Class	Server	Windows Server 2012R2	10 Years	Exceeded	Yes	Virtual Machine
+...	...	...	...	...	...	...	...
+246	Variable Rooms	Laptop	HP Probook 640 G2, stored in trolley	6 - 8 Years	2025	Soon	
+247	Variable Rooms	Laptop	HP Probook 640 G2, stored in trolley	6 - 8 Years	2025	Soon	
+248	Variable Rooms	Laptop	HP Probook 640 G2, stored in trolley	6 - 8 Years	2025	Soon	
+249	Variable Rooms	Laptop	HP Probook 640 G2, stored in trolley	6 - 8 Years	2025	Soon	
+250	Variable Rooms	Laptop	Lenovo 300e 2nd generation	2 - 3 Years	2024	Yes	Hardly used, all flat and not being charged
+79 rows × 7 columns
+
+for x in df.index:
+    if df.loc[x, "Consider Replacing"] == 'Soon':
+        df.drop(x, inplace=True) 
+df
+
+Location	Device	Make and Model	Estimated Age *	End Of Life Expectancy *	Consider Replacing	Notes
+6	Mrs Anderson's Class	Monitor	HannsG HE225	10 Years	Exceeded	Yes	21.5" The Monitor is blurry
+7	Mrs Anderson's Class	Server	Host Machine with four VM's	11 Years	Exceeded	Yes	Intel Xeon E3-1230 v3, 32GB RAM
+8	Mrs Anderson's Class	Server	Windows Server 2012R2	10 Years	Exceeded	Yes	Virtual Machine
+9	Mrs Anderson's Class	Server	Windows Server 2012R2	10 Years	Exceeded	Yes	Virtual Machine
+10	Mrs Anderson's Class	Server	Windows Server 2012R2	10 Years	Exceeded	Yes	Virtual Machine
+12	Mrs Anderson's Class	UPS	APC Smart 750	6 - 8 Years	Soon	Maybe	Depends on the batteries
+13	Mrs Anderson's Class	UPS	APC Smart 750	6 - 8 Years	Soon	Maybe	Not connected to anything
+15	Hampson's Hive & Wellbeing Room	Desktop PC	Intel NUC 7 Mainstream Kit	6 Years	2026	Maybe	Win 10 Edu, 8GB RAM, SSD Drive. Intel i3 - 7100U
+16	Hampson's Hive & Wellbeing Room	Laptop	Toshiba Satelite Pro L850	12 Years	Exceeded	Yes	Win 10 Edu, 4GB RAM, SSD Drive, Intel i3 - 3212M
+20	Hampson's Hive & Wellbeing Room	Interactive Screen	Smartboard SB650	15 - 20 Years	Exceeded	Yes	Still working ok
+21	Hampson's Hive & Wellbeing Room	Projector	Epson EB-X7	15 Years	Exceeded	Yes	Still working ok
+23	Mrs O'Donnel Room	Monitor	Unknown	Unknown	Unknown	Maybe	
+26	Class 6	Monitor	HannsG HE225	10 Years	Exceeded	Maybe	Working ok
+27	Class 6	Visualiser	Genee Vision 6100	12 Years	Exceeded	Maybe	Working ok
+42	Class 5 Mr Hope	Monitor	HannsG HL229	10 Years	Exceeded	Maybe	Works ok
+44	Class 5 Mr Hope	Visualiser	Genee Vision 6100	12 Years	Exceeded	Maybe	Works ok
+47	Mrs Bakers Room	Monitor	HannsG HE225	10 Years	Exceeded	Maybe	Works ok
+49	Mrs Bakers Room	Visualiser	Genee Vision 6100	12 Years	Exceeded	Maybe	Needs a new power adapter
+50	Mrs Bakers Room	WiFi	Unifi UAP	5 - 8 Years	Unknown	Maybe	Ageing WiFi Unit
+52	Mrs Chilton Class 1	Monitor	HannsG HE225	10 Years	Exceeded	Maybe	Works ok
+54	Mrs Chilton Class 1	Visualiser	Genee Vision 6100	12 Years	Exceeded	Maybe	Works ok
+57	Class 2	Monitor	HannsG HE225	10 Years	Exceeded	Maybe	Works ok
+59	Class 2	Visualiser	Genee Vision 6100	12 Years	Exceeded	Maybe	Works ok
+62	Mrs Hunter's Room	Monitor	HannsG HE225	10 Years	Exceeded	Maybe	Works ok
+64	Mrs Hunter's Room	Visualiser	Genee Vision 6100	12 Years	Exceeded	Maybe	Works ok
+65	Mrs Hunter's Room	WiFi	Unifi UAP	5 - 8 Years	Unknown	Maybe	Ageing WiFi Unit
+67	Mr Ritson's Class 3	Monitor	HannsG HE225	10 Years	Exceeded	Maybe	Works ok
+69	Mr Ritson's Class 3	Visualiser	Genee Vision 6100	12 Years	Exceeded	Maybe	Works ok
+72	Tiny Room Near Class 2	Monitor	HannsG HH221	10 - 15 Years	Exceeded	Yes	The resolution is very low.
+73	Tiny Room Near Class 2	Interactive Screen	Smartboard SB650	15 - 20 Years	Exceeded	Yes	
+74	Tiny Room Near Class 2	Projector	Unknown	Unknown	Unknown	Maybe	
+76	Mrs McGlasson Class 4	Monitor	HannsG HE225	10 Years	Exceeded	Maybe	Works ok
+78	Mrs McGlasson Class 4	Visualiser	Genee Vision 6100	12 Years	Exceeded	Maybe	Works ok
+81	Heads Office	Monitor	HannsG HL226	10 Years	Exceeded	Maybe	Works ok
+82	Heads Office	Monitor	HannsG HL226	10 Years	Exceeded	Maybe	Works ok
+84	Reception Office	Desktop PC	Intel NUC 7 Mainstream Kit	6 Years	2026	Maybe	Win 10 Edu, 8GB RAM, SSD Drive. Intel i3 - 7100U
+85	Reception Office	Monitor	HannsG HL226	10 Years	Exceeded	Maybe	Works ok
+86	Reception Office	Monitor	HannsG HL226	10 Years	Exceeded	Maybe	Works ok
+87	Reception Office	Desktop PC	Intel NUC 7 Mainstream Kit	6 Years	2026	Maybe	Win 10 Edu, 8GB RAM, SSD Drive. Intel i3 - 7100U
+88	Reception Office	Monitor	HannsG HL226	10 Years	Exceeded	Maybe	Works ok
+89	Reception Office	Monitor	HannsG HL226	10 Years	Exceeded	Maybe	Works ok
+96	Staff Room	WiFi	Unifi UAP	5 - 8 Years	Unknown	Maybe	Ageing WiFi Unit
+250	Variable Rooms	Laptop	Lenovo 300e 2nd generation	2 - 3 Years	2024	Yes	Hardly used, all flat and not being charged
+
+for x in df.index:
+    if df.loc[x, "Consider Replacing"] == 'Maybe':
+        df.drop(x, inplace=True)                      # We are now lwft with the just the Yes under the Consider Replacing column
+df
+
+Location	Device	Make and Model	Estimated Age * End Of Life Expectancy *	Consider Replacing	Notes
+6	Mrs Anderson's Class	Monitor	HannsG HE225	10 Years	Exceeded	Yes	21.5" The Monitor is blurry
+7	Mrs Anderson's Class	Server	Host Machine with four VM's	11 Years	Exceeded	Yes	Intel Xeon E3-1230 v3, 32GB RAM
+8	Mrs Anderson's Class	Server	Windows Server 2012R2	10 Years	Exceeded	Yes	Virtual Machine
+9	Mrs Anderson's Class	Server	Windows Server 2012R2	10 Years	Exceeded	Yes	Virtual Machine
+10	Mrs Anderson's Class	Server	Windows Server 2012R2	10 Years	Exceeded	Yes	Virtual Machine
+16	Hampson's Hive & Wellbeing Room	Laptop	Toshiba Satelite Pro L850	12 Years	Exceeded	Yes	Win 10 Edu, 4GB RAM, SSD Drive, Intel i3 - 3212M
+20	Hampson's Hive & Wellbeing Room	Interactive Screen	Smartboard SB650	15 - 20 Years	Exceeded	Yes	Still working ok
+21	Hampson's Hive & Wellbeing Room	Projector	Epson EB-X7	15 Years	Exceeded	Yes	Still working ok
+72	Tiny Room Near Class 2	Monitor	HannsG HH221	10 - 15 Years	Exceeded	Yes	The resolution is very low.
+73	Tiny Room Near Class 2	Interactive Screen	Smartboard SB650	15 - 20 Years	Exceeded	Yes	
+250	Variable Rooms	Laptop	Lenovo 300e 2nd generation	2 - 3 Years	2024	Yes	Hardly used, all flat and not being charged
+
+
+
 
