@@ -5,3 +5,6 @@ I then followed that up by creating a Tableau Dashboard of the school's floor pl
 
 Next I opened SSMS (SQL Server Management Studio) and imprted the excel file that houses the Junior School Data.  There were some empty columns so I removed those and then used some basic commands to query the data.
 
+Agter using SQL I then moved on to Python and used Pandas to remove excess NULL columns and then remove the some of the data that contained NaN.  Lastly I used basic commands to narrow down what devices are in need of replacing according to the data.
+
+My final project was to use Power BI and create several visualisations.  Some of them I used Conditional Formatting to colour co-ordinate bwtweeen them.  I placed a slicer on the page rather than use a filter on the side Menu and on one of the charts I created a simple Measure for the Card Visual to show a percentage value.
